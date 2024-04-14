@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html th:frament="html" xmlns:th="http://www.thymeleaf.org/" data-bs-theme="dark">
+
+    <head th:frament="head">
+        <title th:text="${titulo}"></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" th:href="@{/csss/bootstrap.css}" /> 
+        <link rel="stylesheet" th:href="@{/csss/jquery-ui.min.css}" /> 
+        <link rel="stylesheet" th:href="@{/csss/jquery-ui.min.css}" />
+
+    </head>
+    <body th:frament="body" style="background: black;color: white">
+        <header  th:frament="header" >
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+
+
+
+
+                <div class="container-fluid">
+                    <a class="navbar-brand " href="#">
+                        <div class="">  <img class="" th:src="@{/can.png}" width="50" height="50" alt="">
+                            spring boot</div>
+
+
+
+                    </a>
+
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="  navbar-nav">
+                            <a class="nav-link active" aria-current="page" th:href="@{/index}">Home</a>
+                            <a class="nav-link" th:href="@{/listar}">clientes</a>
+                            <a class="nav-link" th:href="@{/form}">REGISTRAR CLIENTE</a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+            <div class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+            <div class="alert alert-info" th:if="${info != null}"  th:text="${info}"></div>
+
+
+
+
+        </header>
+
+
+
+        <footer th:frament="footer">
+            <script th:src="@{/js/popper.min.js}"></script>
+            <script th:src="@{/js/bootstrap.js}" ></script>
+            <script th:src="@{/js/bootstrap.bundle.js}"></script>
+            <script th:src="@{/js/jquery-ui.min.js}"></script>
+            <script th:src="@{/js/jquery-ui.min.js}"></script>
+
+
+        </footer>
+
+
+    </body>
+
+</html>
