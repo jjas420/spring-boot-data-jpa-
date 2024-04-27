@@ -6,6 +6,8 @@ package com.bolsadeideas.springboot.app;
 
 import org.springframework.context.annotation.Bean;
     import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
     import org.springframework.security.config.annotation.web.builders.HttpSecurity;
     import org.springframework.security.core.userdetails.User;
     import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +19,7 @@ import org.springframework.context.annotation.Bean;
  * @author ayosu
  */
 @Configuration
+@EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SpringSegurityConfig {
 
     @Bean
@@ -47,11 +50,12 @@ public class SpringSegurityConfig {
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
      
           http.authorizeRequests().requestMatchers("/","/index", "/csss/**", "/js/**", "/images/**", "/listar").permitAll()
-                  .requestMatchers("/ver/**").hasAnyRole("USER")
-                    .requestMatchers("/uploads/**").hasAnyRole("USER")
-                    .requestMatchers("/form/**").hasAnyRole("ADMIN")
-                    .requestMatchers("/eliminar/**").hasAnyRole("ADMIN")
-                    .requestMatchers("/factura/**").hasAnyRole("ADMIN").anyRequest().authenticated().and()
+                //  .requestMatchers("/ver/**").hasAnyRole("USER")
+                //    .requestMatchers("/uploads/**").hasAnyRole("USER")
+                //    .requestMatchers("/form/**").hasAnyRole("ADMIN")
+                 //   .requestMatchers("/eliminar/**").hasAnyRole("ADMIN")
+                  //  .requestMatchers("/factura/**").hasAnyRole("ADMIN")
+                  .anyRequest().authenticated().and()
                     .formLogin().loginPage("/login").permitAll()
                     .and()
                     .logout().permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
