@@ -4,6 +4,8 @@
  */
 package com.bolsadeideas.springboot.app;
 
+import com.bolsadeideas.springboot.app.auth.handler.LoginSuccesHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
     import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -20,7 +22,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
  */
 @Configuration
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
-public class SpringSegurityConfig {
+public class SpringSegurityConfig{
+    @Autowired
+	private LoginSuccesHandler successHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -55,10 +59,17 @@ public class SpringSegurityConfig {
                 //    .requestMatchers("/form/**").hasAnyRole("ADMIN")
                  //   .requestMatchers("/eliminar/**").hasAnyRole("ADMIN")
                   //  .requestMatchers("/factura/**").hasAnyRole("ADMIN")
-                  .anyRequest().authenticated().and()
-                    .formLogin().loginPage("/login").permitAll()
-                    .and()
-                    .logout().permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
+                  .anyRequest().authenticated()
+		.and()
+		    .formLogin()
+		        .successHandler(successHandler)
+		        .loginPage("/login")
+		    .permitAll()
+		.and()
+		.logout().permitAll()
+		.and()
+		.exceptionHandling().accessDeniedPage("/error_403");
+
              
                 
            
