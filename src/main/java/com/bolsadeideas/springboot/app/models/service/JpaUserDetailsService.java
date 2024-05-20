@@ -44,13 +44,15 @@ public class JpaUserDetailsService implements UserDetailsService {
         }
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for (Role role : usuario.getRoles()) {
+            logger.info("Role: ".concat(role.getAuthority()));
             authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
+            
 
         }
           if(authorities.isEmpty()){
             logger.error("error login: no existe el usuario '"+ username+ "'no tiene roles");
             
-            throw new UsernameNotFoundException ("error login: no existe el usuario '\"+ username+ \"'no tiene roles");
+            throw new UsernameNotFoundException ("error login: no existe el usuario '"+ username+ "'no tiene roles");
             
         }
         
