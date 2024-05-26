@@ -33,8 +33,10 @@ import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.Locale;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.context.MessageSource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -54,6 +56,10 @@ public class ClienteController {
 
     @Autowired
     private IUploadFileService uploadFileService;
+    
+    @Autowired
+    private MessageSource messageSource;
+    
 
     @RequestMapping(value = {"index", "/"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -99,7 +105,7 @@ public class ClienteController {
 
     @RequestMapping(value = "/listar", method = RequestMethod.GET)
     public String listar(@RequestParam(name = "page", defaultValue = "0") int page, Model model, Authentication authentication,
-            HttpServletRequest request) {
+            HttpServletRequest request, Locale locale) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null) {
@@ -132,7 +138,7 @@ public class ClienteController {
         Page<Cliente> clientes = clienteService.findAll(pageRequest);
 
         PageRender<Cliente> pageRender = new PageRender<Cliente>("/listar", clientes);
-        model.addAttribute("titulo", "Listado de clientes");
+        model.addAttribute("titulo", messageSource.getMessage("text.cliente.listar.titulo", null, locale));
         model.addAttribute("clientes", clientes);
         model.addAttribute("page", pageRender);
         return "listar";
