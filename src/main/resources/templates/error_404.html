@@ -6,6 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <html  xmlns:th="http://www.thymeleaf.org/"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"   data-bs-theme="dark">
     
     <head th:replace="layout/layout :: head">
+        
 
     </head>
     <body>
@@ -14,16 +15,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
             <div class="container py-4">
                 <div class="card bg-danger text-white">
-                    <div class="card-header"> ERROR: ACCESO DENEGADO!!
+                    <div class="card-header"> ERROR: pagina no encontrada!! 
 
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">
-                            los sentimos <span sec:authentication="name" />, no tienes permisos para acceder a este recurso.
+                            los sentimos <span sec:authentication="name" />, no existe este recurso para acceder a este recurso.
 
-                          
+                        
 
                         </h5>
+                        <h1 th:text="${error}"></h1>
                         
                         <a class="btn btn-outline-light" th:href="@{/}" role="button"> ir al inicio</a>
 
