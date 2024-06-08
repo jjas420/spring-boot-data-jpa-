@@ -9,7 +9,9 @@ import com.bolsadeideas.springboot.app.models.entity.ItemFactura;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Map;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -42,7 +44,10 @@ public class FacturaXlsxView extends AbstractXlsxView {
         sheet.createRow(6).createCell(0).setCellValue("folio: " + factura.getId());
         sheet.createRow(7).createCell(0).setCellValue("descripcion: " + factura.getDescripcion());
         sheet.createRow(8).createCell(0).setCellValue("fecha:" + factura.getCreateAt());
-
+        CellStyle theaderStyle= workbook.createCellStyle();
+        
+        
+        
         Row header = sheet.createRow(9);
         header.createCell(0).setCellValue("Producto");
         header.createCell(1).setCellValue("Precio");
