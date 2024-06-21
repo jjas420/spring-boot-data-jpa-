@@ -31,8 +31,10 @@ import com.bolsadeideas.springboot.app.models.entity.Cliente;
 import com.bolsadeideas.springboot.app.models.service.IClienteService;
 import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
+import com.bolsadeideas.springboot.app.view.xml.ClienteList;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,6 +46,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @SessionAttributes("cliente")
@@ -56,10 +59,9 @@ public class ClienteController {
 
     @Autowired
     private IUploadFileService uploadFileService;
-    
+
     @Autowired
     private MessageSource messageSource;
-    
 
     @RequestMapping(value = {"index", "/"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -101,6 +103,12 @@ public class ClienteController {
         model.put("cliente", cliente);
         model.put("titulo", "Detalle cliente: " + cliente.getNombre());
         return "ver";
+    }
+
+    @GetMapping(value = "/listar-rest")
+    public @ResponseBody ClienteList listarRest() {
+        return new ClienteList(clienteService.findAll());
+
     }
 
     @RequestMapping(value = "/listar", method = RequestMethod.GET)

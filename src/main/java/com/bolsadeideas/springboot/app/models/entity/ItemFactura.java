@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.app.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 
 import jakarta.persistence.Entity;
@@ -22,7 +23,10 @@ public class ItemFactura implements Serializable {
 	private Integer cantidad;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+        
+        
 	@JoinColumn(name = "producto_id")
+        @JsonIgnoreProperties  ({"hibernateLazyInitializer","handler"})
 	private Producto producto;
 
     public Producto getProducto() {
